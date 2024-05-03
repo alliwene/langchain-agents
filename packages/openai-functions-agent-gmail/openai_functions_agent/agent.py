@@ -22,7 +22,9 @@ from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.tools import tool
 
 from dotenv import load_dotenv
+
 load_dotenv()
+
 
 @tool
 def search_engine(query: str, max_results: int = 5) -> str:
@@ -61,7 +63,7 @@ prompt = ChatPromptTemplate.from_messages(
 ).partial(user=current_user)
 
 
-llm = ChatOpenAI(model="gpt-4-1106-preview", temperature=0)
+llm = ChatOpenAI(temperature=0)  # model="gpt-4-1106-preview",
 llm_with_tools = llm.bind(functions=[format_tool_to_openai_function(t) for t in tools])
 
 
